@@ -1,5 +1,11 @@
 <script lang="ts">
 	export let segment: string;
+
+  import Textfield, {Input, Textarea} from '@smui/textfield';
+  import Icon from '@smui/textfield/icon/index';
+  import HelperText from '@smui/textfield/helper-text/index';
+  let valueFullwidth = '';
+  
 </script>
 
 <style>
