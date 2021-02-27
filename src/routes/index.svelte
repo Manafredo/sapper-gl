@@ -23,37 +23,35 @@
 </script>
 
 <style>
-	h1, p {
+	 p {
 		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	p {
 		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
 	}
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Gemeinsam lesen - gute Bücher von inspirierenden Personen empfohlen</title>
 </svelte:head>
 
 <div class="filterCategories btn-group stack-exception">
     <Button class="btn toggle-btn" aria-pressed={filter === "Politiker"} on:click={()=> filter = "Politiker"} >
       <span>Politiker</span>
     </Button>
+	<Button class="btn toggle-btn" aria-pressed={filter === "Influencer"} on:click={()=> filter = "Influencer"} >
+		<span>Influencer</span>
+	</Button>
+	<Button class="btn toggle-btn" aria-pressed={filter === "Wissenschaftler"} on:click={()=> filter = "Wissenschaftler"} >
+		<span>Wissenschaftler</span>
+	</Button>
+	<Button class="btn toggle-btn" aria-pressed={filter === "Sportler"} on:click={()=> filter = "Sportler"} >
+		<span>Sportler</span>
+	</Button>
+	<Button class="btn toggle-btn" aria-pressed={filter === "Journalist"} on:click={()=> filter = "Journalist"} >
+		<span>Journalist</span>
+	</Button>
+	<Button class="btn toggle-btn" aria-pressed={filter === "Andere"} on:click={()=> filter = "Andere"} >
+		<span>Andere</span>
+	</Button>
     <Button class="btn toggle-btn"  aria-pressed={filter === "Entrepreneur"} on:click={()=> filter = "Entrepreneur"} >
       <span>Entrepreneur</span>
     </Button>
