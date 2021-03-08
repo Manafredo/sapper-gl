@@ -5,6 +5,7 @@
 	import ImageList, {Item, ImageAspectContainer, Image, Supporting} from '@smui/image-list';
 	import './image-list.scss';
 
+
   let persons = [];
   let filter = "Alle";
 
@@ -25,12 +26,6 @@
         : persons;
 </script>
 <style>
-	Image {
-  		display: block;
-  		max-width:230px;
-  		max-height:95px;
-  		width: auto;
-  		height: auto;}
 </style>
 
 <svelte:head>
