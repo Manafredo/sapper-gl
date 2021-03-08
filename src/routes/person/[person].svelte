@@ -1,19 +1,25 @@
 <script>
+  	//onMount starts stuff before loading the page
     import {onMount} from "svelte";
-	import { stores } from '@sapper/app';
-	import Paper, {Title, Content} from '@smui/paper';
+    //INfo about Parameters
+	  import { stores } from '@sapper/app';
+    // Material UI for Svelte
+	  import Paper, {Title, Content} from '@smui/paper';
 
-
+    // Variables for fechted data
     let books =[];
     let person = [];
     let bookarr =[];
     let commentarr=[];
     let booksWithComments=[];
 
+    // Variables for selected person
     let name;
     let description;
-	let pictureurl;
-	const {page} = stores();
+	  let pictureurl;
+
+    // Getting personanme from parameters
+	  const {page} = stores();
     let personName = $page.params.person;
     personName = personName.replace("_"," ");
 
@@ -24,9 +30,10 @@
       person= person.items;
       name=person["0"]["fields"]["name"];
       description = person["0"]["fields"]["description"];
-	  pictureurl=person["0"]["fields"]["pictureurl"];
+	    pictureurl=person["0"]["fields"]["pictureurl"];
       //console.log(person);
       
+      //Get all bokks from selected person
       const response2 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=book&include=2&fields.person.sys.id="+person["0"]["sys"]["id"]+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
       books = await response2.json();
@@ -37,6 +44,7 @@
       }
       //console.log(bookarr);
 
+      //Get all comments from selected person
       const response3 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=personBook&include=2&fields.person.sys.id="+person["0"]["sys"]["id"]+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
       let comments = await response3.json();
@@ -46,16 +54,19 @@
         commentarr.push({id: obj.fields.book.sys.id, sourcedescription: obj.fields.sourcedescription})
       }
       //console.log(commentarr);
+      //Mapping Informnation from Books and Comments
       booksWithComments=bookarr.map(t1 => ({...t1, ...commentarr.find(t2=>t2.id===t1.id)}));
       //console.log(booksWithComments);
 
     });
     
 </script>
-<link rel="stylesheet" href="https://use.typekit.net/cal1lzu.css">
+
+<!-- Necessary for styling of person - making sure pictures to the left of the text-->
 <style>
 .flex-container {
-  display: flex;}
+  display: flex;
+}
 img {
   border-radius: 50%;
   max-width: 200px;

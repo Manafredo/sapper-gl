@@ -13,6 +13,7 @@
     "@glidejs/glide": "^3.4.1",
     "compression": "^1.7.1",
     "polka": "next",
+    "postcss": "^8.2.7",
     "sirv": "^1.0.0",
     "svelte-splide": "^1.0.2",
     "swiper": "^6.4.15"
