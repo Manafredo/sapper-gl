@@ -71,9 +71,11 @@ img {
   border-radius: 50%;
   max-width: 200px;
 }
-
 </style>
+
+<!-- paper style from material ui-->
 <main>
+<!-- display of person-->
   <div style="display: flex; flex-wrap: wrap;">
 	<div>
 		<div class="paper-container">
@@ -93,6 +95,7 @@ img {
 		</div>
 	  </div>
   </div>
+  <!-- show books with comments-->
     <ul>
       {#each booksWithComments as book}
           <a href={"http://localhost:3000/buch/" + book.title}>{book.title}</a>

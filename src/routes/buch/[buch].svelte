@@ -8,7 +8,6 @@
     let persons = [];
     let personsarr =[];
     let commentsarr =[];
-    let comments =[];
     let personsWithComments =[];
     let description;
     let author;
@@ -26,6 +25,7 @@
 
 
     onMount(async function() {
+      // fetching information from book
       const response = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?select=sys.id,fields&content_type=book&include=0&fields.title="+title+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
       book = await response.json();
@@ -34,6 +34,7 @@
       author = book["0"]["fields"]["author"];
       coverurl = book["0"]["fields"]["coverurl"];
       
+      // fetching information from comments & persons
       const response3 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=personBook&include=2&fields.book.sys.id="+book["0"]["sys"]["id"]+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
       let comments = await response3.json();
@@ -52,18 +53,12 @@
     
 </script>
 
-<link rel="stylesheet" href="https://use.typekit.net/cal1lzu.css">
-
 <style>
-
-  p {
-    font-family:"myriad-pro";
-  }
   .flex-container {
   display: flex;}
-img {
-  max-width: 200px;
-}
+  img {
+    max-width: 200px;
+  }
 </style>
 
 <main>
