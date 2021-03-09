@@ -11,6 +11,9 @@
 	// import page information for base url
 	import { stores } from '@sapper/app';
 	const {page} = stores();
+	import Chip, {Set, Icon, Text} from '@smui/chips';
+	let choice = "Politiker";
+	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"]
 	
 
 	//Variabled used in onMount thats why they are needed here - we could also typescript this here
@@ -30,11 +33,20 @@
 
   });
   	// now we filter persons based on the category, Multiple Categories 
+	// if elly is bored she could create a loop out of this to make it even more elegant
     const filterPersons = (filter, persons) =>
       filter === "Politiker"
         ? persons.filter(p => p.fields.category == "Politiker")
         : filter === "Entrepreneur"
         ? persons.filter(p => p.fields.category == "Entrepreneur")
+		: filter === "Influencer"
+        ? persons.filter(p => p.fields.category == "Influencer")
+		: filter === "Wissenschaftler"
+        ? persons.filter(p => p.fields.category == "Wissenschaftler")
+		: filter === "Sportler"
+        ? persons.filter(p => p.fields.category == "Sportler")
+		: filter === "Journalist"
+        ? persons.filter(p => p.fields.category == "Journalist")
         : persons;
 </script>
 <style>
@@ -46,21 +58,18 @@
 </svelte:head>
 
 <!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
-<div class="filterCategories btn-group">
-    <Button on:click={()=> filter = "Politiker"} ><Label>Politiker</Label></Button>
-	<Button on:click={()=> filter = "Influencer"} ><Label>Influencer</Label></Button>
-	<Button on:click={()=> filter = "Wissenschaftler"} ><Label>Wissenschaftler</Label></Button>
-	<Button on:click={()=> filter = "Sportler"} ><Label>Sportler</Label></Button>
-	<Button on:click={()=> filter = "Journalist"} ><Label>Journalist</Label></Button>
-	<Button on:click={()=> filter = "Andere"} ><Label>Andere</Label></Button>
-	<Button on:click={()=> filter = "Entrepreneur"} ><Label>Entrepreneur</Label></Button>
-	<Button on:click={()=> filter = "Schauspieler" }><Label>Schauspieler</Label></Button>
-	<Button on:click={()=> filter = "Künstler" }><Label>Künstler</Label></Button>
-    <Button on:click={()=> filter = 'Alle'} ><Label>Alle</Label></Button>
-</div>
+
+<div>
+    <Set chips={personcategories} let:chip choice bind:selected={choice}>
+      <Chip><Text>{chip}</Text></Chip>
+    </Set>
+  </div>
+
+
+
   <div>
   <ImageList class="my-image-list-4x4" withTextProtection>
-	{#each filterPersons(filter,persons) as person}
+	{#each filterPersons(choice,persons) as person}
 	<Item>
 		<a href={"http://"+ $page.host + "/person/" + person["fields"]["name"]} src={person["fields"]["pictureurl"]} >
 		<ImageAspectContainer>
