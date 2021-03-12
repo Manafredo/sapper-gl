@@ -4,9 +4,9 @@
     //INfo about Parameters
 	  import { stores } from '@sapper/app';
     // Material UI for Svelte
-	  import Paper, {Title, Content} from '@smui/paper';
+	  import Paper, {Title,Subtitle, Content} from '@smui/paper';
 
-    // Variables for fechted data
+    // Variables for fetched data from contentful
     let books =[];
     let person = [];
     let bookarr =[];
@@ -40,7 +40,7 @@
       books=books.items;
       for (let i=0; i<books.length; i++){
         let obj = books[i];
-        bookarr.push({id: obj.sys.id, title: obj.fields.title, description: obj.fields.description})
+        bookarr.push({id: obj.sys.id, title: obj.fields.title, description: obj.fields.description, cover: obj.fields.coverurl, amazonlink: obj.fields.amazonurl, author: obj.fields.author})
       }
       //console.log(bookarr);
 
@@ -51,13 +51,12 @@
       comments=comments.items;
       for (let i=0; i<comments.length; i++){
         let obj = comments[i];
-        commentarr.push({id: obj.fields.book.sys.id, sourcedescription: obj.fields.sourcedescription})
+        commentarr.push({id: obj.fields.book.sys.id, sourcedescription: obj.fields.sourcedescription, sourceurl: obj.fields.sourceurl})
       }
       //console.log(commentarr);
       //Mapping Informnation from Books and Comments
       booksWithComments=bookarr.map(t1 => ({...t1, ...commentarr.find(t2=>t2.id===t1.id)}));
       //console.log(booksWithComments);
-
     });
     
 </script>
@@ -67,43 +66,58 @@
 .flex-container {
   display: flex;
 }
-img {
-  border-radius: 50%;
-  max-width: 200px;
-}
+
 </style>
 
 <!-- paper style from material ui-->
 <main>
+  <article style="margin: 2em 0">
 <!-- display of person-->
   <div style="display: flex; flex-wrap: wrap;">
 	<div>
 		<div class="paper-container">
 		  <Paper class="paper-person" style="background-color: #e6e6e6;">
-			<div class="flex-container">
-			  <div style="display: flex; align-items: center; justify-content: center;">
-				<img src={pictureurl} alt={name} >
+			  <div class="flex-container">
+			    <div style="display: flex; align-items: center; justify-content: center;">
+              <img src={pictureurl} alt={name} style="border-radius: 50%; max-width: 200px; padding-right: 1em;">
+			    </div>
+			    <div>
+			      <Title>{name}</Title>
+			      <Content>{description}</Content>
 			  </div>
-			  <div>
-				<h1 style="color:#e6e6e6;">0</h1>
-			</div>
-			  <div>
-			<Title>{name}</Title>
-			<Content>{description}</Content>
-			</div>
 		  </Paper>
 		</div>
 	  </div>
   </div>
+</article>
   <!-- show books with comments-->
-    <ul>
+  <article style="margin: 2em 0">
       {#each booksWithComments as book}
-          <a href={"http://localhost:3000/buch/" + book.title}>{book.title}</a>
-          <p>{book.description}</p>
-          <p>Source: {book.sourcedescription}</p>
+      <section style="margin: 1em 0">
+      <div style="display: flex; flex-wrap: wrap;">
+        <div>
+          <div class="paper-container">
+            <Paper class="paper-person" style="background-color: #e6e6e6;">
+              <div class="flex-container">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  
+                    <img src={book.cover} alt={name}  style=" max-width: 100px; padding-right: 1em;" >
+                  
+                </div>
+                <div>
+                  <Title><a href={"http://"+ $page.host + "/buch/" + book.title}>{book.title}</a></Title>
+                  <Subtitle>{book.author}</Subtitle>
+                  <Content>{book.description}</Content>
+                  <a href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
+              </div>
+            </Paper>
+          </div>
+          </div>
+        </div>
+      </section>
       {:else}
       <!-- this block renders when book.length === 0 -->
       <p>loading...</p>
       {/each}
-    </ul>
+  </article>   
   </main>
