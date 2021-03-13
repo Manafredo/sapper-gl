@@ -14,11 +14,10 @@
 	import Chip, {Set, Icon, Text} from '@smui/chips';
 	let choice = "Politiker";
 	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"]
+	let persons = [];
 	
 
-	//Variabled used in onMount thats why they are needed here - we could also typescript this here
-  	let persons = [] ;
-  	let filter = "Alle";
+
 
 	
   onMount(async function() {
@@ -71,7 +70,7 @@
   <ImageList class="my-image-list-4x4" withTextProtection>
 	{#each filterPersons(choice,persons) as person}
 	<Item>
-		<a href={"http://"+ $page.host + "/person/" + person["fields"]["name"]} src={person["fields"]["pictureurl"]} >
+		<a href={"/person/" + person["fields"]["name"]} src={person["fields"]["pictureurl"]} >
 		<ImageAspectContainer>
 			
 			<Image src={person["fields"]["pictureurl"]}></Image>
@@ -87,6 +86,6 @@
 </div>
 {#each filterPersons(choice,persons) as person}
 	<div style="visibility: hidden; position: absolute">
-		<a href={"http://"+ $page.host + "/person/" + person["fields"]["name"]}>.</a>
+		<a href={"/person/" + person["fields"]["name"]}>href={"/person/" + person["fields"]["name"]}</a>
 	</div>
 {/each}
