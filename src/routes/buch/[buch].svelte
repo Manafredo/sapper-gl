@@ -36,6 +36,7 @@
       //preview_description = description.substring(0,500)+ "...";
       author = book["0"]["fields"]["author"];
       coverurl = book["0"]["fields"]["coverurl"];
+      // We need Amazon Link and 
       
       // fetching information from comments & persons
       const response3 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=personBook&include=2&fields.book.sys.id="+book["0"]["sys"]["id"]+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
@@ -57,6 +58,17 @@
 </script>
 
 <style>
+  
+  .flex-container2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+  .flex-item{
+  padding: 1em 0.1em;
+  width: 350px;  
+}
+  
   .flex-container {
   display: flex;}
   img {
@@ -88,17 +100,23 @@
             </div>
           </div>
       </div>
-        <div>
-          <ul>
+      <div class="flex-container2">
           {#each personsWithComments as person}
-          <li>
-            <p>{person.name}</p>
-            <p>Source: {person.sourcedescription}</p>
-          </li>
+          <div class="flex-item">
+          <div class="paper-container">
+             
+              <Paper class="paper-person" style="background-color: #e6e6e6;">
+              <div class="flex-c">
+              <Title>{person.name}</Title>
+              <Content >{person.sourcedescription}</Content>
+              </div>
+            </Paper>
+          </div>
+          </div>
+          
           {:else}
           <!-- this block renders when book.length === 0 -->
           <p>loading...</p>
           {/each}
-        </ul>
         </div>
 </main>

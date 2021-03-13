@@ -108,12 +108,12 @@ a{
             <Paper class="paper-person" style="background-color: #e6e6e6;">
               <div class="flex-container">
                 <div style="display: flex; align-items: center; justify-content: center;">
-                  <a href={"http://"+ $page.host + "/buch/" + book.title}>
+                  <a href={"./buch/" + book.title}>
                     <img src={book.cover} alt={name}  style=" max-width: 120px; padding-right: 1em;" >
                   </a>
                 </div>
                 <div>
-                  <Title><a href={"http://"+ $page.host + "/buch/" + book.title}>{book.title}</a></Title>
+                  <Title><a href={"./buch/" + book.title}>{book.title}</a></Title>
                   <Subtitle>{book.author}</Subtitle>
                   <Content>{book.description.substring(0,100)+ " ..."}</Content>
                   <a href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
