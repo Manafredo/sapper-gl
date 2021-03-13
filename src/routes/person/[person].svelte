@@ -65,6 +65,15 @@
 <style>
 .flex-container {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.flex-item{
+  padding: 1em 0.1em;
+  width: 350px;  
+}
+a{
+  text-decoration: none;
 }
 
 </style>
@@ -79,7 +88,7 @@
 		  <Paper class="paper-person" style="background-color: #e6e6e6;">
 			  <div class="flex-container">
 			    <div style="display: flex; align-items: center; justify-content: center;">
-              <img src={pictureurl} alt={name} style="border-radius: 50%; max-width: 200px; padding-right: 1em;">
+                <img src={pictureurl} alt={name} style="border-radius: 50%; max-width: 200px; padding-right: 1em;">
 			    </div>
 			    <div>
 			      <Title>{name}</Title>
@@ -92,32 +101,30 @@
 </article>
   <!-- show books with comments-->
   <article style="margin: 2em 0">
+    <div class="flex-container" >
       {#each booksWithComments as book}
-      <section style="margin: 1em 0">
-      <div style="display: flex; flex-wrap: wrap;">
-        <div>
+        <div class=flex-item>
           <div class="paper-container">
             <Paper class="paper-person" style="background-color: #e6e6e6;">
               <div class="flex-container">
                 <div style="display: flex; align-items: center; justify-content: center;">
-                  
-                    <img src={book.cover} alt={name}  style=" max-width: 100px; padding-right: 1em;" >
-                  
+                  <a href={"http://"+ $page.host + "/buch/" + book.title}>
+                    <img src={book.cover} alt={name}  style=" max-width: 120px; padding-right: 1em;" >
+                  </a>
                 </div>
                 <div>
                   <Title><a href={"http://"+ $page.host + "/buch/" + book.title}>{book.title}</a></Title>
                   <Subtitle>{book.author}</Subtitle>
-                  <Content>{book.description}</Content>
+                  <Content>{book.description.substring(0,100)+ " ..."}</Content>
                   <a href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
               </div>
             </Paper>
           </div>
-          </div>
         </div>
-      </section>
       {:else}
       <!-- this block renders when book.length === 0 -->
       <p>loading...</p>
       {/each}
+      </div>
   </article>   
   </main>

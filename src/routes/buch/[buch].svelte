@@ -12,6 +12,8 @@
     let description;
     let author;
     let coverurl;
+    let count = 1;
+    let preview_description;
 
     const {page} = stores();
     let title = $page.params.buch;
@@ -31,6 +33,7 @@
       book = await response.json();
       book= book.items;
       description = book["0"]["fields"]["description"];
+      //preview_description = description.substring(0,500)+ "...";
       author = book["0"]["fields"]["author"];
       coverurl = book["0"]["fields"]["coverurl"];
       
@@ -75,8 +78,11 @@
                 </div>
                   <div>
                 <Title>{title}</Title>
-                <Subtitle>{author}</Subtitle>
-                <Content>{description}</Content>
+                <Subtitle >{author}</Subtitle>
+                <Content>
+                    {description}
+                </Content>
+                
                 </div>
               </Paper>
             </div>

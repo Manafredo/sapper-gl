@@ -12,7 +12,7 @@
 	import { stores } from '@sapper/app';
 	const {page} = stores();
 	import Chip, {Set, Icon, Text} from '@smui/chips';
-	let choice = "Politiker";
+	let choice = "";
 	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"]
 	let persons = [];
 	let books = [];
@@ -97,7 +97,7 @@
 {/each}
 
 {#each books as book}
-	<div style="position: absolute">
+	<div style="visibility: hidden; position: absolute">
 		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
 	</div>
 {/each}
