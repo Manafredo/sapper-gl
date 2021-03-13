@@ -15,6 +15,7 @@
 	let choice = "Politiker";
 	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"]
 	let persons = [];
+	let books = [];
 	
 
 
@@ -29,6 +30,11 @@
 	const persondata = await response.json();
 	//.items is the part of the json that we need
 	persons =  persondata.items;
+	// getting book data as well
+	const response2 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?select=sys.id,fields&content_type=book&include=0&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
+      );
+    	const bookdata = await response2.json();
+      	books= bookdata.items;
 
   });
   	// now we filter persons based on the category, Multiple Categories 
@@ -87,5 +93,11 @@
 {#each filterPersons(choice,persons) as person}
 	<div style="visibility: hidden; position: absolute">
 		<a href={"/person/" + person["fields"]["name"]}>href={"/person/" + person["fields"]["name"]}</a>
+	</div>
+{/each}
+
+{#each books as book}
+	<div style="visibility: hidden; position: absolute">
+		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
 	</div>
 {/each}
