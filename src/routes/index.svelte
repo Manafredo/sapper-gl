@@ -97,7 +97,7 @@
 {/each}
 
 {#each books as book}
-	<div style="visibility: hidden; position: absolute">
+	<div style="position: absolute">
 		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
 	</div>
 {/each}
