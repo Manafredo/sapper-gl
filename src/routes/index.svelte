@@ -85,3 +85,8 @@
 	{/each}
   </ImageList>
 </div>
+{#each filterPersons(choice,persons) as person}
+	<div style="visibility: hidden; position: absolute">
+		<a href={"http://"+ $page.host + "/person/" + person["fields"]["name"]}>.</a>
+	</div>
+{/each}
