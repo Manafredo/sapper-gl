@@ -3,8 +3,11 @@
     import {onMount} from "svelte";
     //INfo about Parameters
 	  import { stores } from '@sapper/app';
+    import "@fortawesome/fontawesome-free/js/all.min.js"
     // Material UI for Svelte
 	  import Paper, {Title,Subtitle, Content} from '@smui/paper';
+    import Button, {Icon, Label} from '@smui/button'
+    import '../button.scss';
 
     // Variables for fetched data from contentful
     let books =[];
@@ -63,6 +66,15 @@
 
 <!-- Necessary for styling of person - making sure pictures to the left of the text-->
 <style>
+  * :global(.myClass) {
+    text-decoration: underline !important;
+  }
+  * :global(.mdc-button, .smui-button__group) {
+    margin-bottom: .4em;
+  }
+  * :global(.smui-button__group .mdc-button) {
+    margin-bottom: 0;
+  }
 .flex-container {
   display: flex;
   flex-flow: row wrap;
@@ -116,7 +128,15 @@ a{
                   <Title><a href={"./buch/" + book.title}>{book.title}</a></Title>
                   <Subtitle>{book.author}</Subtitle>
                   <Content>{book.description.substring(0,100)+ " ..."}</Content>
-                  <a href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
+                  <a  href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
+                  <div style="padding-top: 1em">
+                    <Button variant="outlined"><i class="fab fa-amazon" style="color: #ff922b; margin-right: 1em"></i><Label>  Auf Amazon ansehen</Label></Button>                
+                  </div>
+                  <!--
+                  <div style="padding-top: 1em">
+                    <Button variant="outlined"><img src="thalia.svg" alt="Thalia" style="width: 40px"><Label>  Auf Amazon ansehen</Label></Button>                
+                  </div>-->
+
               </div>
             </Paper>
           </div>

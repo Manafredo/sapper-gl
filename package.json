@@ -10,6 +10,8 @@
     "validate": "svelte-check --ignore src/node_modules/@sapper"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@glidejs/glide": "^3.4.1",
     "compression": "^1.7.1",
     "polka": "next",
