@@ -13,7 +13,7 @@
 	const {page} = stores();
 	import Chip, {Set, Icon, Text} from '@smui/chips';
 	let choice = "";
-	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"]
+	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"];
 	let persons = [];
 	let books = [];
 	
@@ -55,6 +55,11 @@
         : persons;
 </script>
 <style>
+	.center {
+		margin:auto;
+		width: 75%;
+		align-items: center;
+	}
 </style>
 
 <svelte:head>
@@ -64,7 +69,7 @@
 
 <!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
 
-<div>
+<div class="center">
     <Set chips={personcategories} let:chip choice bind:selected={choice}>
       <Chip><Text>{chip}</Text></Chip>
     </Set>

@@ -104,6 +104,7 @@
 	.flex-box {
 		display:flex;
         justify-content:space-between;
+		align-items: center;
         }
 </style>
 
@@ -116,15 +117,15 @@
 				<li><a href={"http://"+ $page.host + ""}><img src="logo_lang.png" alt="Logo" style="height:55px;"></a></li>
 			</div>
 			<div class="flex-item">
-				<li style="padding-top:1em">      
+				<li>      
 					<div>
-						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={valueShapedOutlinedB} label="Suche" input$aria-controls="helper-text-shaped-outlined-b" input$aria-describedby="helper-text-shaped-outlined-b">
+						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={valueShapedOutlinedB} label="Suche" input$aria-controls="helper-text-shaped-outlined-b" input$aria-describedby="helper-text-shaped-outlined-b" style="height: 50%">
 						</Textfield>
 					</div>
 				</li>
 			</div>
 			<div class="flex-item">
-				<li style="float: right; padding-top:0.5em"><a href=https://github.com/Manafredo/sapper-gl><img src="github.png"  alt="Github"></a></li>
+				<li style="float: right; padding-left:7em;"><a href=https://github.com/Manafredo/sapper-gl><img src="github.png"  alt="Github"></a></li>
 			</div>
 		</div>
 		<!--<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href={"http://"+ $page.host + ""}>about</a></li>
