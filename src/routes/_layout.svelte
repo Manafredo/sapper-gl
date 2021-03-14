@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Nav from '../components/Nav.svelte';
-	import Footer from '../components/Footer.svelte'
+	import Footer from '../components/Footer.svelte';
+	import { stores } from '@sapper/app';
+	const {page} = stores();
 
 	export let segment: string;
 </script>
@@ -16,10 +18,12 @@
 	}
 </style>
 
-<Nav {segment}/>
+{#if $page.path!=="/"}
+	<Nav {segment}/>
+{/if}
 
-<main>
-	<slot></slot>
-</main>
+
+<slot></slot>
+
 
 <Footer {segment} />

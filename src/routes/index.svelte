@@ -3,6 +3,7 @@
 <script lang="ts">
 	//onMount starts stuff before loading the page
 	import { onMount } from "svelte";
+	import Nav from '../components/Nav.svelte';
 	//importing styling from materialui
 	import './button.scss';
   	import Button, {Label} from '@smui/button';
@@ -57,8 +58,16 @@
 <style>
 	.center {
 		margin:auto;
-		width: 75%;
+		width: 100%;
 		align-items: center;
+	}
+	main {
+		position: relative;
+		max-width: 56em;
+		background-color: white;
+		padding: 2em;
+		margin: 0 auto;
+		box-sizing: border-box;
 	}
 </style>
 
@@ -68,7 +77,9 @@
 </svelte:head>
 
 <!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
+<Nav bind:value={persons}/>
 
+<main>
 <div class="center">
     <Set chips={personcategories} let:chip choice bind:selected={choice}>
       <Chip><Text>{chip}</Text></Chip>
@@ -106,3 +117,5 @@
 		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
 	</div>
 {/each}
+
+</main>

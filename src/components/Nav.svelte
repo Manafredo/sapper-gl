@@ -4,7 +4,7 @@
 <script lang="ts">
 
 /*Lets try some material ui stuff*/
-  
+	export let value = [];
   let prominent = false;
   let dense = false;
   let secondaryColor = false;
@@ -12,7 +12,8 @@
 	import { stores } from '@sapper/app';
 	const {page} = stores();
 	import Textfield, {Input, Textarea} from '@smui/textfield';
-	let valueShapedOutlinedB = '';
+	import List, {Group, Item, Graphic, Meta, Label, Separator, Subheader, Text, PrimaryText, SecondaryText} from '@smui/list';
+	let searchTerm = '';
 
 	let keyedTabs = [
 		{
@@ -34,6 +35,13 @@
 	let keyedTabsActive = keyedTabs[0];
 
 
+  // Loop through all list items, and hide those who don't match the search query
+  const searchPersons = (search, persons) =>
+    search.length >= 3
+        ? persons.filter(p => p.fields.name.includes(search,0))
+	:search === "Alle"
+        ? persons.filter(p => p.fields.name.includes(" ",0))
+		: "nix";
 
 /* This is code that might be used for implementing the search in the navbar
   import Textfield, {Input, Textarea} from '@smui/textfield';
@@ -51,7 +59,6 @@
 		background-color: #EFEFEF;
 		border-bottom: 1px solid #B1B1B1;
 		font-weight: 300;
-		padding: 0 1em;
 	}
 	ul {
 		margin: 0;
@@ -106,6 +113,15 @@
         justify-content:space-between;
 		align-items: center;
         }
+
+.dropdown-content {
+  display:inherit;
+  position:absolute;
+  background-color: #f9f9f9;
+  min-width:260px;
+  z-index: 1;
+}
+
 </style>
 
 <!-- This is the html part where we add the navbar -->
@@ -119,8 +135,31 @@
 			<div class="flex-item">
 				<li>      
 					<div>
-						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={valueShapedOutlinedB} label="Suche" input$aria-controls="helper-text-shaped-outlined-b" input$aria-describedby="helper-text-shaped-outlined-b" style="height: 50%">
+						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={searchTerm} label="Suche" style="height: 50%">
 						</Textfield>
+						{#if searchPersons(searchTerm, value)=="nix"}
+						<p style="display:none;">text eingeben</p>
+						{:else}
+						<div class="dropdown-content">
+							<List class="demo-list">
+								{#each searchPersons(searchTerm, value) as item}
+								<Item>
+									<div style="display: flex; padding: 0 1em 0 0;">
+										<a href={"/person/" + item["fields"]["name"]} src={item["fields"]["pictureurl"]} >
+										<img src={item["fields"]["pictureurl"]} alt="url" style="border-radius: 50%; max-width: 35px;">
+									</div>
+									<div>
+										<Text>
+											<a href={"/person/" + item["fields"]["name"]} src={item["fields"]["pictureurl"]} >
+											<PrimaryText>{item["fields"]["name"]}</PrimaryText>
+											<SecondaryText>{item["fields"]["category"]}</SecondaryText>
+										</Text>
+									</div>
+								</Item>
+								{/each}
+							</List>
+						</div>
+						{/if}
 					</div>
 				</li>
 			</div>
@@ -135,7 +174,5 @@
 		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li> -->
 	</ul>
 </nav>
-
-
 
 

@@ -6,8 +6,8 @@
     <h1>Impressum</h1>
     <p>Informationspflicht laut § 5 TMG.</p>
     <p class="adsimple-321218400">
-        </p><p>Andrej Schulz</p>
-        <p class="adsimple-321218400">Kolonierstr. 21, <br>13359 Berlin, <br>Deutschland</p>
+        </p><p>c\o gemeinsamlesen.eu</p>
+        <p class="adsimple-321218400">Kolonierstr. 21 <br>13359 Berlin, <br>Deutschland</p>
         <p class="adsimple-321218400">
         <strong>Tel.:</strong> +4915678340267<br>
         <strong>E-Mail:</strong> <a href="mailto:gemeinsamlesen.eu@gmail.com"> gemeinsamlesen.eu@gmail.com</a>

@@ -135,8 +135,8 @@ a{
                   <!--
                   <div style="padding-top: 1em">
                     <Button variant="outlined"><img src="thalia.svg" alt="Thalia" style="width: 40px"><Label>  Auf Amazon ansehen</Label></Button>                
-                  </div>-->
-
+                  </div>
+                -->
               </div>
             </Paper>
           </div>
