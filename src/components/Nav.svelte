@@ -5,15 +5,15 @@
 
 /*Lets try some material ui stuff*/
   
-	export let segment;
   let prominent = false;
   let dense = false;
   let secondaryColor = false;
 
 	import { stores } from '@sapper/app';
 	const {page} = stores();
-	import Tab, {Icon, Label} from '@smui/tab';
-	import TabBar from '@smui/tab-bar';
+	import Textfield, {Input, Textarea} from '@smui/textfield';
+	let valueShapedOutlinedB = '';
+
 	let keyedTabs = [
 		{
 		k: 1,
@@ -56,51 +56,77 @@
 	ul {
 		margin: 0;
 		padding: 0;
+		justify-content: space-between;
 	}
 	/* clearfix */
 	ul::after {
 		content: '';
 		display: block;
 		clear: both;
+		justify-content: space-between;
+		
 	}
 	li {
 		display: block;
 		float: left;
 	}
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: #FF9700;
-		display: block;
-		bottom: -1px;
-	}
+	
 	a {
 		text-decoration: none;
 		padding: 1em 0.5em;
 		display: block;
 	}
+  * :global(.shaped) {
+    border-radius: 16px 16px 0 0;
+  }
+  * :global(.shaped-outlined .mdc-text-field__input) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  * :global(.shaped-outlined .mdc-notched-outline .mdc-notched-outline__leading) {
+    border-radius: 28px 0 0 28px;
+    width: 28px;
+  }
+  * :global(.shaped-outlined .mdc-notched-outline .mdc-notched-outline__trailing) {
+    border-radius: 0 28px 28px 0;
+  }
+  * :global(.shaped-outlined .mdc-notched-outline .mdc-notched-outline__notch) {
+    max-width: calc(100% - 28px * 2);
+  }
+  * :global(.shaped-outlined + .mdc-text-field-helper-line) {
+    padding-left: 32px;
+    padding-right: 28px;
+  }
 	img {
 		text-decoration: none;
-		padding: 0.5em 0;
 		display: block;
 	}
+	.flex-box {
+		display:flex;
+        justify-content:space-between;
+        }
 </style>
 
 <!-- This is the html part where we add the navbar -->
 <!-- Navbar is added using material ui components that are loaded in he script section - there is no linking yet-->
 <nav>
 	<ul>
-
-		<li>
-			<img src="logo_lang.png" alt="Logo" style="height:40px;">
-		</li>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href={"http://"+ $page.host + ""}>home</a></li>
+		<div class="flex-box">
+			<div class="flex-item">
+				<li><a href={"http://"+ $page.host + ""}><img src="logo_lang.png" alt="Logo" style="height:55px;"></a></li>
+			</div>
+			<div class="flex-item">
+				<li style="padding-top:1em">      
+					<div>
+						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={valueShapedOutlinedB} label="Suche" input$aria-controls="helper-text-shaped-outlined-b" input$aria-describedby="helper-text-shaped-outlined-b">
+						</Textfield>
+					</div>
+				</li>
+			</div>
+			<div class="flex-item">
+				<li style="float: right; padding-top:0.5em"><a href=https://github.com/Manafredo/sapper-gl><img src="github.png"  alt="Github"></a></li>
+			</div>
+		</div>
 		<!--<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href={"http://"+ $page.host + ""}>about</a></li>
 
 		 for the blog link, we're using rel=prefetch so that Sapper prefetches
