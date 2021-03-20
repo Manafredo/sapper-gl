@@ -75,6 +75,7 @@
   * :global(.smui-button__group .mdc-button) {
     margin-bottom: 0;
   }
+  
 .flex-container {
   display: flex;
   flex-flow: row wrap;
@@ -92,9 +93,9 @@ a{
 
 <!-- paper style from material ui-->
 <main>
-  <article style="margin: 2em 0">
+  <article style="margin: 2em 2em">
 <!-- display of person-->
-  <div style="display: flex; flex-wrap: wrap;">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
 	<div>
 		<div class="paper-container">
 		  <Paper class="paper-person" style="background-color: #e6e6e6;">
