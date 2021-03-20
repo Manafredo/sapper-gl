@@ -1,6 +1,7 @@
 # try branching
 
 Hello this is done by a branch
+This is done by another branch
 
 # Installing
 
