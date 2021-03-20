@@ -164,7 +164,7 @@
 				</li>
 			</div>
 			<div class="flex-item">
-				<li style="float: right; padding-left:7em;"><a href=https://github.com/Manafredo/sapper-gl><img src="github.png"  alt="Github"></a></li>
+				<li style="float: right; padding-left:7em;"><a href=https://github.com/Manafredo/sapper-gl><img src="Github.png"  alt="Github"></a></li>
 			</div>
 		</div>
 		<!--<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href={"http://"+ $page.host + ""}>about</a></li>
