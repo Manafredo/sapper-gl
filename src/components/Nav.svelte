@@ -9,6 +9,8 @@
   let dense = false;
   let secondaryColor = false;
 
+  import "@fortawesome/fontawesome-free/js/all.min.js"
+
 	import { stores } from '@sapper/app';
 	const {page} = stores();
 	import Textfield, {Input, Textarea} from '@smui/textfield';
@@ -164,7 +166,7 @@
 				</li>
 			</div>
 			<div class="flex-item">
-				<li style="float: right; padding-left:7em;"><a href=https://github.com/Manafredo/sapper-gl><img src="Github.png"  alt="Github"></a></li>
+				<li style="float: right; padding-left:7em;"><a href=https://github.com/Manafredo/sapper-gl><i class="fab fa-github" style ="width: 2em; height: 2em"></i></a></li>
 			</div>
 		</div>
 		<!--<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href={"http://"+ $page.host + ""}>about</a></li>
