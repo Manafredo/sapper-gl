@@ -3,7 +3,6 @@
     import { stores } from '@sapper/app';
     import Paper, {Title, Subtitle, Content} from '@smui/paper';
 
-
     let book =[];
     let persons = [];
     let personsarr =[];
@@ -77,34 +76,32 @@
 </style>
 
 <main>
-    <div style="display: flex; flex-wrap: wrap;">
-        <div>
-            <div class="paper-container">
-              <Paper class="paper-person" style="background-color: #e6e6e6;">
-                <div class="flex-container">
-                  <div style="display: flex; align-items: center; justify-content: center;">
-                    <img src={coverurl} alt={title} >
-                  </div>
-                  <div>
-                    <h1 style="color:#e6e6e6;">0</h1>
-                </div>
-                  <div>
-                <Title>{title}</Title>
-                <Subtitle >{author}</Subtitle>
-                <Content>
-                    {description}
-                </Content>
-                
-                </div>
-              </Paper>
-            </div>
+  <article style="margin: 2em 2em">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+      <div class="paper-container">
+        <Paper class="paper-person" style="background-color: #e6e6e6;">
+        <div class="flex-container">
+          <div style="display: flex; align-items: center; justify-content: center;">
+              <img src={coverurl} alt={title} >
           </div>
+          <div>
+              <h1 style="color:#e6e6e6;">0</h1>
+          </div>
+          <div>
+            <Title>{title}</Title>
+            <Subtitle >{author}</Subtitle>
+            <Content>{description}</Content>
+          </div>
+        </div>
+        </Paper>
       </div>
+    </div>
+  </article>
+  <article>
       <div class="flex-container2">
           {#each personsWithComments as person}
           <div class="flex-item">
           <div class="paper-container">
-             
               <Paper class="paper-person" style="background-color: #e6e6e6;">
               <div class="flex-c">
               <Title>{person.name}</Title>
@@ -113,10 +110,10 @@
             </Paper>
           </div>
           </div>
-          
           {:else}
           <!-- this block renders when book.length === 0 -->
           <p>loading...</p>
           {/each}
-        </div>
+      </div>
+    </article>
 </main>
