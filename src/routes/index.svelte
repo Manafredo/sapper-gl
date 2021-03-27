@@ -4,6 +4,7 @@
 	//onMount starts stuff before loading the page
 	import { onMount } from "svelte";
 	import Nav from '../components/Nav.svelte';
+	import { personstore } from './stores.js';
 	//importing styling from materialui
 	import './button.scss';
   	import Button, {Label} from '@smui/button';
@@ -18,6 +19,10 @@
 	let persons = [];
 	let books = [];
 	
+	
+
+
+	
 
 
 
@@ -31,6 +36,7 @@
 	const persondata = await response.json();
 	//.items is the part of the json that we need
 	persons =  persondata.items;
+	$personstore = persons;
 	// getting book data as well
 	const response2 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?select=sys.id,fields&content_type=book&include=0&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
@@ -77,7 +83,7 @@
 </svelte:head>
 
 <!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
-<Nav bind:value={persons}/>
+<Nav/>
 
 <main>
 <div class="center">
@@ -117,5 +123,6 @@
 		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
 	</div>
 {/each}
+
 
 </main>

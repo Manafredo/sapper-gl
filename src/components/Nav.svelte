@@ -3,13 +3,19 @@
 <!-- This Javascript piece  -->
 <script lang="ts">
 
-/*Lets try some material ui stuff*/
-	export let value = [];
+/*value gets loaded from index.svelte*/
+	
   let prominent = false;
   let dense = false;
   let secondaryColor = false;
+  import { personstore } from '../routes/stores.js';
 
-  import "@fortawesome/fontawesome-free/js/all.min.js"
+  let personfilter;
+  const unsubscribe = personstore.subscribe(value => {
+	personfilter = value;
+  })
+ 
+  import "@fortawesome/fontawesome-free/js/brands.min.js"
 
 	import { stores } from '@sapper/app';
 	const {page} = stores();
@@ -139,12 +145,12 @@
 					<div>
 						<Textfield class="shaped-outlined" variant="outlined" withLeadingIcon bind:value={searchTerm} label="Suche" style="height: 50%">
 						</Textfield>
-						{#if searchPersons(searchTerm, value)=="nix"}
+						{#if searchPersons(searchTerm, personfilter)=="nix"}
 						<p style="display:none;">text eingeben</p>
 						{:else}
 						<div class="dropdown-content">
 							<List class="demo-list">
-								{#each searchPersons(searchTerm, value) as item}
+								{#each searchPersons(searchTerm, personfilter) as item}
 								<Item>
 									<div style="display: flex; padding: 0 1em 0 0;">
 										<a href={"/person/" + item["fields"]["name"]} src={item["fields"]["pictureurl"]} >
@@ -175,6 +181,6 @@
 		     the blog data when we hover over the link or tap it on a touchscreen 
 		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li> -->
 	</ul>
+	
 </nav>
-
 
