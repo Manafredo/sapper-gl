@@ -6,8 +6,7 @@
 	import Nav from '../components/Nav.svelte';
 	//importing styling from materialui
 	import './button.scss';
-  	import Button, {Label} from '@smui/button';
-	import ImageList, {Item, ImageAspectContainer, Image, Supporting} from '@smui/image-list';
+	import ImageList, {Item, ImageAspectContainer, Image, Supporting, Label} from '@smui/image-list';
 	import './image-list.scss';
 	// import page information for base url
 	import { stores } from '@sapper/app';
@@ -76,7 +75,6 @@
 	<title>Gemeinsam lesen - gute Bücher von inspirierenden Personen empfohlen</title>
 </svelte:head>
 
-<!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
 <Nav bind:value={persons}/>
 
 <main>
