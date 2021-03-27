@@ -61,6 +61,10 @@
       booksWithComments=bookarr.map(t1 => ({...t1, ...commentarr.find(t2=>t2.id===t1.id)}));
       //console.log(booksWithComments);
     });
+
+    function handleClick(URL) {
+      window.open(URL, '_blank')
+	}
     
 </script>
 
@@ -129,9 +133,9 @@ a{
                   <Title><a href={"./buch/" + book.title}>{book.title}</a></Title>
                   <Subtitle>{book.author}</Subtitle>
                   <Content>{book.description.substring(0,100)+ " ..."}</Content>
-                  <a  href={book.sourceurl}>Bewertung: {book.sourcedescription}</a>
+                  <a  href={book.sourceurl} target="_blank" rel="noopener noreferrer">Bewertung: {book.sourcedescription}</a>
                   <div style="padding-top: 1em">
-                    <Button variant="outlined"><i class="fab fa-amazon" style="color: #ff922b; margin-right: 1em"></i><Label>  Auf Amazon ansehen</Label></Button>                
+                    <Button variant="outlined" on:click={handleClick(book.amazonlink)}><i class="fab fa-amazon" style="color: #ff922b; margin-right: 1em"></i><Label>  Auf Amazon ansehen</Label></Button>                
                   </div>
                   <!--
                   <div style="padding-top: 1em">
