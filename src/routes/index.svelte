@@ -3,8 +3,6 @@
 <script lang="ts">
 	//onMount starts stuff before loading the page
 	import { onMount } from "svelte";
-	import Nav from '../components/Nav.svelte';
-	import { personstore } from './stores.js';
 	//importing styling from materialui
 	import './button.scss';
 	import ImageList, {Item, ImageAspectContainer, Image, Supporting, Label} from '@smui/image-list';
@@ -12,18 +10,11 @@
 	// import page information for base url
 	import { stores } from '@sapper/app';
 	const {page} = stores();
-	import Chip, {Set, Icon, Text} from '@smui/chips';
+	import Chip, {Set, Text} from '@smui/chips';
 	let choice = "";
 	let personcategories =["Politiker","Influencer","Wissenschaftler","Sportler","Journalist","Entrepreneur"];
 	let persons = [];
 	let books = [];
-	
-	
-
-
-	
-
-
 
 	
   onMount(async function() {
@@ -35,7 +26,6 @@
 	const persondata = await response.json();
 	//.items is the part of the json that we need
 	persons =  persondata.items;
-	$personstore = persons;
 	// getting book data as well
 	const response2 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?select=sys.id,fields&content_type=book&include=0&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
@@ -81,9 +71,6 @@
 	<title>Gemeinsam lesen - gute Bücher von inspirierenden Personen empfohlen</title>
 </svelte:head>
 
-<!--Hardcoded because they dont change that often, should be changed to use chips instead of Buttons-->
-<Nav/>
-
 
 <main>
 <div class="center">
@@ -100,9 +87,7 @@
 	<Item>
 		<a href={"/person/" + person["fields"]["name"]} src={person["fields"]["pictureurl"]} >
 		<ImageAspectContainer>
-			
 			<Image src={person["fields"]["pictureurl"]}></Image>
-
 		</ImageAspectContainer>
 		<Supporting>
 		  <Label>{person["fields"]["name"]}</Label>
@@ -112,17 +97,4 @@
 	{/each}
   </ImageList>
 </div>
-{#each filterPersons(choice,persons) as person}
-	<div style="visibility: hidden; position: absolute">
-		<a href={"/person/" + person["fields"]["name"]}>href={"/person/" + person["fields"]["name"]}</a>
-	</div>
-{/each}
-
-{#each books as book}
-	<div style="visibility: hidden; position: absolute">
-		<a href={"/buch/" + book["fields"]["title"]}>href={"/buch/" + book["fields"]["title"]}</a>
-	</div>
-{/each}
-
-
 </main>

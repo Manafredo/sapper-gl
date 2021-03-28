@@ -4,10 +4,8 @@
 <script lang="ts">
 
 /*value gets loaded from index.svelte*/
-	
-  let prominent = false;
-  let dense = false;
-  let secondaryColor = false;
+
+  import { onMount } from "svelte";
   import { personstore } from '../routes/stores.js';
 
   let personfilter;
@@ -16,32 +14,26 @@
   })
  
   import "@fortawesome/fontawesome-free/js/brands.min.js"
-
-	import { stores } from '@sapper/app';
+  import { stores } from '@sapper/app';
 	const {page} = stores();
-	import Textfield, {Input, Textarea} from '@smui/textfield';
-	import List, {Group, Item, Graphic, Meta, Label, Separator, Subheader, Text, PrimaryText, SecondaryText} from '@smui/list';
+	import Textfield from '@smui/textfield';
+	import List, { Item, Text, PrimaryText, SecondaryText} from '@smui/list';
 	let searchTerm = '';
+	let persons = [];
 
-	let keyedTabs = [
-		{
-		k: 1,
-		label: 'Home',
-		path: '/'
-		},
-		{
-		k: 2,
-		label: 'Buch',
-		path: '/buch'
-		},
-		{
-		k: 3,
-		label: 'Impressum',
-		path: '/impressum',
-		}
-	];
-	let keyedTabsActive = keyedTabs[0];
 
+
+	onMount(async function() {
+	//Start db connection with contentful
+	const response = await fetch(
+	  "https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=person&include=0&select=sys.id,fields&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
+	);
+	//transform response to json and store in array
+	const persondata = await response.json();
+	//.items is the part of the json that we need
+	persons =  persondata.items;
+	$personstore = persons;
+	});
 
   // Loop through all list items, and hide those who don't match the search query
   const searchPersons = (search, persons) =>

@@ -1,19 +1,5 @@
 <script lang="ts">
-
-    /*Lets try some material ui stuff*/
-        import { stores } from '@sapper/app';
-import Impressum from '../routes/impressum.svelte';
-        const {page} = stores();
-
-    
-    /* This is code that might be used for implementing the search in the navbar
-      import Textfield, {Input, Textarea} from '@smui/textfield';
-      import Icon from '@smui/textfield/icon/index';
-      import HelperText from '@smui/textfield/helper-text/index';
-      let valueFullwidth = '';
-    */
-      
-    </script>
+</script>
     
     <!-- This is the css part with  sapper / svelte standard styling we took from the example  -->
     <!-- Here we should try to implement the colors from Meltems Design Colourcoding -->
