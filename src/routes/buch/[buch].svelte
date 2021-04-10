@@ -2,6 +2,8 @@
     import {onMount} from "svelte";
     import { stores } from '@sapper/app';
     import Paper, {Title, Subtitle, Content} from '@smui/paper';
+    import Button, {Label} from '@smui/button'
+
 
     let book =[];
     let persons = [];
@@ -45,15 +47,18 @@
       comments=comments.items;
       for (let i=0; i<comments.length; i++){
         let obj = comments[i];
-        commentsarr.push({id: obj.fields.person.sys.id, sourcedescription: obj.fields.sourcedescription})
+        commentsarr.push({id: obj.fields.person.sys.id, sourcedescription: obj.fields.sourcedescription,  sourceurl: obj.fields.sourceurl})
       }
       for (let i=0; i<persons.length; i++){
         let obj = persons[i];
-        personsarr.push({id: obj.sys.id, name: obj.fields.name, description: obj.fields.description})
+        personsarr.push({id: obj.sys.id, name: obj.fields.name, description: obj.fields.description, pictureurl: obj.fields.pictureurl})
       }
       personsWithComments=commentsarr.map(t1 => ({...t1, ...personsarr.find(t2=>t2.id===t1.id)}));
     });
-    
+
+    function handleClick(URL) {
+      window.open(URL, '_blank')
+	}
 </script>
 
 <style>
@@ -91,6 +96,9 @@
             <Title>{title}</Title>
             <Subtitle >{author}</Subtitle>
             <Content>{description}</Content>
+            <div style="padding-top: 1em">
+              <Button variant="outlined" on:click={handleClick(book.amazonlink)}><i class="fab fa-amazon" style="color: #ff922b; margin-right: 1em"></i><Label>  Auf Amazon ansehen</Label></Button>                
+            </div>
           </div>
         </div>
         </Paper>
@@ -101,14 +109,19 @@
       <div class="flex-container2">
           {#each personsWithComments as person}
           <div class="flex-item">
-          <div class="paper-container">
+            <div class="paper-container">
               <Paper class="paper-person" style="background-color: #e6e6e6;">
-              <div class="flex-c">
-              <Title>{person.name}</Title>
-              <Content >{person.sourcedescription}</Content>
+                <div style="display: flex;">
+                <div style="display: flex; align-items: left; justify-content: left;">
+                  <a  href={"./person/" + person.name}><img src={person.pictureurl} alt="name" style="border-radius: 50%; max-width: 80px; padding-right: 1em;"></a>
+                </div>
+                <div>
+                  <Title>{person.name}</Title>
+                  <Content ><a  href={person.sourceurl} target="_blank" rel="noopener noreferrer">{person.sourcedescription}</a> </Content>
+                </div>
               </div>
-            </Paper>
-          </div>
+              </Paper>
+            </div>
           </div>
           {:else}
           <!-- this block renders when book.length === 0 -->
