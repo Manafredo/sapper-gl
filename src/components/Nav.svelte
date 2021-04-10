@@ -42,13 +42,6 @@
 	:search === "Alle"
         ? persons.filter(p => p.fields.name.includes(" ",0))
 		: "nix";
-
-/* This is code that might be used for implementing the search in the navbar
-  import Textfield, {Input, Textarea} from '@smui/textfield';
-  import Icon from '@smui/textfield/icon/index';
-  import HelperText from '@smui/textfield/helper-text/index';
-  let valueFullwidth = '';
-*/
   
 </script>
 
@@ -145,12 +138,12 @@
 								{#each searchPersons(searchTerm, personfilter) as item}
 								<Item>
 									<div style="display: flex; padding: 0 1em 0 0;">
-										<a href={"/person/" + item["fields"]["name"]} src={item["fields"]["pictureurl"]} >
+										<a sapper:prefetch href={"/person/" + item["fields"]["name"]} target="_blank" src={item["fields"]["pictureurl"]} >
 										<img src={item["fields"]["pictureurl"]} alt="url" style="border-radius: 50%; max-width: 35px;">
 									</div>
 									<div>
 										<Text>
-											<a href={"/person/" + item["fields"]["name"]} src={item["fields"]["pictureurl"]} >
+											<a href={"/person/" + item["fields"]["name"]} target="_blank" src={item["fields"]["pictureurl"]} >
 											<PrimaryText>{item["fields"]["name"]}</PrimaryText>
 											<SecondaryText>{item["fields"]["category"]}</SecondaryText>
 										</Text>
